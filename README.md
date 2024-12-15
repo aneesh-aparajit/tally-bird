@@ -1,2 +1,2 @@
-# tally-bird
-Implementing and learning about HyperLogLog
+# TallyBird
+> Implementing and learning about HyperLogLog
