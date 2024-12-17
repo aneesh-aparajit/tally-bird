@@ -27,5 +27,5 @@ $$
 
 
 ## Todo
-[x] Implement Vanilla HyperLogLog
-[ ] Implement Presto
+- [x] Implement Vanilla HyperLogLog
+- [ ] Implement Presto
