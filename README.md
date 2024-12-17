@@ -13,18 +13,20 @@
     - Both the above methods require a lot of work.
     - Can we achieve the task by only finger counting? YES
 
-## Flajolet-Martin Algorithm
-- __Idea__: Track the longest sequence of leading zeroes you have seen in the 6 digits of phone numbers.
-- __Estimation__: The estimation of how many unique users will be close to 10^L, where L is the longest sequence of leading zeroes you found in all the numbers.
-    - Instead of counting the zeroes in decimal, we can do it in the binary data.
-- We hash the entry , because the criteria we choose to keep track of may not be IID (identical and independantly distributed).
-    - If we are using binary outputs, let's say we have a total of `x` leading zeroes, in that case, we will say that roughtly $2^x$ users visited the site.
-    - There is also correction factor ($\phi=0.77351$)
+he HyperLogLog (HLL) is a probablistic data structure that tracks the cardinality of large data sets. HyperLogLog is suited for scenarios like the above, where the goal is to count the number of unique items in a massive data stream without explicitly storing every item. HLL relies on a clever hashing mechanism and a compact data structure to provide accurate estimates of unique users while using only a fraction of the memory required by traditional methods. This makes HLL an essential tool in modern database analytics.
+
+HLL provides probabilistic counting mechanism based on the following parameters:
+
+- `b` - Number of initial bits in a binary representation of a hash value
+- `m` - number of registers (or also called buckets) - can be considered as a memory block. They are equal to 2^b. (The terms "buckets" and "registers" can be used interchangeably when discussing HyperLogLog and tasks).
+- `p` - leftmost position of 1 (MSBs position of 1)
+
+
+Consider a simple example of how this algorithm works using the string "A great database is a great life". First, the string is hashed to produce a hash value, which is then converted into its binary representation. From the hash value (binary form), b bits are extracted, starting from the most significant bit(MSB). The register value is calculated from the extracted bits. (by default each register has a value of 0).
 
 $$
-\text{Cardinality} = \frac{2^L}{\phi}
+\text{Cardinality} = \alpha*m*\frac{m}{\sum_{i=1}^N2^{-M[i]}}
 $$
-
 
 ## Todo
 - [x] Implement Vanilla HyperLogLog
